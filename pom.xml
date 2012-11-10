@@ -1,0 +1,8 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.apache.diploma</groupId>
+  <artifactId>maven-hibernate-exporter</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Maven plugin for Hibernate database export</name>
+  <description>The goal of this thesis is to create a Maven plugin to support database schema export by Hibernate. Schema export must be done during the Maven build lifecycle as a separate Maven goal. </description>
+</project>
