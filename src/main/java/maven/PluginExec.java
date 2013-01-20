@@ -1,40 +1,45 @@
 package maven;
 
 
+
 import hibernate.HibernateUtil;
 
-import java.io.*;
-import java.net.URL;
-import java.util.List;
-import java.util.Properties;
-
-import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
-import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-
-@Mojo(name="helloworld", requiresProject=true, requiresDependencyResolution=ResolutionScope.COMPILE)
+/**
+ * 
+ * @author Petr
+ * @goal helloworld
+ * @configurator include-project-dependencies
+ * @requiresDependencyResolution compile
+ * @requiresDependencyResolution compile+runtime
+ */
 public class PluginExec extends AbstractMojo {
 
 	@Component
 	private MavenProject project;
 	
+	/**
+	    * Any String to print out.
+	    * @parameter
+	    *   expression="${helloworld.hibernateConfigurationPath}"
+	    *   default-value="undefined"
+	    */
+	private String hibernateConfigurationPath;
+	
+	static final Logger LOG = LoggerFactory.getLogger(PluginExec.class);
 	
 	
 	private HibernateUtil hibernateUtil;
 
 	public PluginExec(){
-		Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
-		logger.info("Hello !!!!!");
-		
 		
 		/*List runtimeClasspathElements;
 		try {
@@ -53,17 +58,18 @@ public class PluginExec extends AbstractMojo {
 		hibernateUtil = new HibernateUtil();
 	}
 	
-	/**
-     * Hibernate configuration path.
-     *
-     * @parameter default-value="undefined"
-     */
-    private String hibernateConfigurationPath;
+    
 	
 	public void execute() throws MojoExecutionException, MojoFailureException {
-			
+		
+		
+			LOG.debug("LOL");
+			LOG.info(hibernateConfigurationPath);
+			getLog().info("HELLO 2 !!!");
+		
+		
 		try{
-			hibernateConfigurationPath = "C:\\Dropbox\\Data\\Programming\\Eclipse_WorkSpace\\git\\Quickstart\\Quickstart\\src\\main\\java\\hibernate.cfg.xml";
+			//hibernateConfigurationPath = "C:\\Dropbox\\Data\\Programming\\Eclipse_WorkSpace\\git\\Quickstart\\Quickstart\\src\\main\\java\\hibernate.cfg.xml";
 			hibernateConfigurationPathIsValid();
 			
 			hibernateUtil.setConfigurationPath(hibernateConfigurationPath);
@@ -71,15 +77,16 @@ public class PluginExec extends AbstractMojo {
 			hibernateUtil.createConfiguration();
 			
 			String result = hibernateUtil.createTablesScript(null);
+			LOG.info(result);
 	
 			getLog().info("Maven Plugin for Hibernate Export");
 			
 		}catch(IllegalArgumentException e){
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}catch(ClassNotFoundException e){
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 	}
 	
