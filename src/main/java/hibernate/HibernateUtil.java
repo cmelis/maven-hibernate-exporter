@@ -1,12 +1,12 @@
 package hibernate;
 
+import java.io.File;
 import java.util.List;
 import java.util.Properties;
 
 import org.hibernate.HibernateException;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
-import org.hibernate.exception.Configurable;
 
 public class HibernateUtil {
 
@@ -37,8 +37,9 @@ public class HibernateUtil {
 			return;
 		}
 		
+		File confirationFile = new File(configurationPath);
 		configuration = new Configuration();
-		configuration.configure(configurationPath);
+		configuration.configure(confirationFile);
 
 	}
 

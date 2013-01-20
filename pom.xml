@@ -8,7 +8,7 @@
 	<name>Maven plugin for Hibernate database export</name>
 	<description>The goal of this thesis is to create a Maven plugin to support database schema export by Hibernate. Schema export must be done during the Maven build lifecycle as a separate Maven goal. </description>
 
-	<build>
+	<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.diploma</groupId>
@@ -27,9 +27,10 @@
 		</plugins>
 
 
+
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -53,7 +54,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<execute></execute>
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
@@ -62,6 +63,22 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
+	</build> -->
+	
+	<build>
+	    <plugins>
+	        <plugin>
+	            <groupId>org.codehaus.plexus</groupId>
+	            <artifactId>plexus-maven-plugin</artifactId>
+	            <executions>
+	                <execution>
+	                    <goals>
+	                        <goal>descriptor</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>
+	    </plugins>
 	</build>
 
 	<dependencies>
@@ -70,6 +87,37 @@
 			<artifactId>maven-plugin-api</artifactId>
 			<version>2.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<version>3.0.3</version>
+		</dependency>
+		
+		<dependency>
+	      <groupId>org.apache.maven.plugin-tools</groupId>
+	      <artifactId>maven-plugin-annotations</artifactId>
+	      <version>3.2</version>
+	    </dependency>
+	    
+	    <dependency>
+	    	<groupId>org.apache.maven</groupId>
+	        <artifactId>maven-artifact</artifactId>
+	        <version>2.2.1</version>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>org.apache.maven</groupId>
+	        <artifactId>maven-project</artifactId>
+	        <version>2.2.1</version>
+	    </dependency>
+	    
+	    <dependency>
+	        <groupId>org.apache.maven</groupId>
+	        <artifactId>maven-model</artifactId>
+	        <version>2.2.1</version>
+	    </dependency>
+	    
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -130,5 +178,11 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.4</version>
 		</dependency>
+		
+	    <dependency>
+	    	<groupId>ch.qos.logback</groupId>
+	    	<artifactId>logback-classic</artifactId>
+	    	<version>0.9.18</version>
+	    </dependency>
 	</dependencies>
 </project>
